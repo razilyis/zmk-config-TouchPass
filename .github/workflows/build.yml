@@ -4,6 +4,29 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    with:
-      token: ${{ secrets.PAT_GITHUB }}
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: West Init
+        run: west init -l config
+
+      - name: West Update
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com/".insteadOf "https://github.com/"
+          west update
+
+      - name: West Zephyr export
+        run: west zephyr-export
+
+      - name: West Build
+        run: west build -s zmk/app -b seeed_xiao_nrf52840 -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: touchpass-firmware
+          path: build/zephyr/zmk.uf2
