@@ -4,8 +4,6 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: TouchPass
       url-base: https://github.com/razilyis
-    - name: zephyrproject-rtos
-      url-base: https://github.com/zephyrproject-rtos
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -14,9 +12,5 @@ manifest:
     - name: zmk-module-TouchPass
       remote: TouchPass
       revision: main
-    - name: littlefs
-      remote: zephyrproject-rtos
-      path: modules/fs/littlefs
-      revision: ca583fd297ceb48bced3c2548600dc615d67af24
   self:
     path: config
