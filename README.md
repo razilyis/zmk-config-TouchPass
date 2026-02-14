@@ -4,6 +4,7 @@
 > 本プロジェクトは、[tobiasweissert/TouchPass](https://github.com/tobiasweissert/TouchPass) の素晴らしい実装を ZMK 向けにポーティングしたものです。
 
 指紋センサーを使用してパスワードを管理・入力するための、XIAO nRF52840 をベースとした ZMK ファームウェアプロジェクトです。
+本プロジェクトは **ZMK v0.3** をベースに構築されています。
 
 ## 概要
 - **指紋認証**: R502-A シリーズの指紋センサーを使用。
