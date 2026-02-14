@@ -17,8 +17,9 @@ jobs:
         run: |
           mkdir workspace
           cp -r main-repo/config workspace/config
-          # Ensure boards folder is available to the build
-          cp -r main-repo/boards workspace/boards
+          # Copy only shields to avoid board name conflicts with ZMK built-ins
+          mkdir -p workspace/boards
+          cp -r main-repo/boards/shields workspace/boards/
 
       - name: West Init
         working-directory: workspace
@@ -36,7 +37,7 @@ jobs:
 
       - name: West Build
         working-directory: workspace
-        run: west build -s zmk/app -b seeed_xiao_nrf52840 -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
+        run: west build -s zmk/app -b xiao_ble -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
