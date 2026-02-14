@@ -10,23 +10,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+            path: main-repo
+
+      - name: Create Workspace
+        run: |
+          mkdir workspace
+          cp -r main-repo/config workspace/config
+          # Ensure boards folder is available to the build
+          cp -r main-repo/boards workspace/boards
 
       - name: West Init
+        working-directory: workspace
         run: west init -l config
 
       - name: West Update
+        working-directory: workspace
         run: |
           git config --global url."https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com/".insteadOf "https://github.com/"
           west update
 
       - name: West Zephyr export
+        working-directory: workspace
         run: west zephyr-export
 
       - name: West Build
-        run: west build -s zmk/app -b seeed_xiao_nrf52840 -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        working-directory: workspace
+        run: west build -s zmk/app -b seeed_xiao_nrf52840 -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         with:
           name: touchpass-firmware
-          path: build/zephyr/zmk.uf2
+          path: workspace/build/zephyr/zmk.uf2
