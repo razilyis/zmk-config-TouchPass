@@ -9,7 +9,7 @@ manifest:
       remote: zmkfirmware
       revision: v0.3
       import: app/west.yml
-    - name: zmk-module-touchpass
+    - name: zmk-module-TouchPass
       remote: TouchPass
       revision: main
   self:
