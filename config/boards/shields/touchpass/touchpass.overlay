@@ -20,6 +20,13 @@
 // DCDC is enabled via Kconfig (CONFIG_BOARD_ENABLE_DCDC=y) in ZMK v0.3/Zephyr 3.5
 // The reg0/reg1 nodes are not defined in this version's device tree.
 
+&zephyr_udc0 {
+    status = "okay";
+    usb_cdc_acm_uart: cdc-acm-uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};
+
 / {
     chosen {
         /* Disable default UART console to prevent boot hang if pins are used elsewhere */
