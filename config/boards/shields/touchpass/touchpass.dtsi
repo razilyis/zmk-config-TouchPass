@@ -21,4 +21,11 @@
         rows = <1>;
         events = <ZMK_MOCK_PRESS(0,0,10) ZMK_MOCK_RELEASE(0,0,10)>;
     };
+
+    behaviors {
+        tp: tp {
+            compatible = "zmk,behavior-touchpass";
+            #binding-cells = <0>;
+        };
+    };
 };
