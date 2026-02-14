@@ -35,10 +35,10 @@ west update
 2. 依存している `zmk-module-TouchPass` も GitHub（ユーザー名: `razilyis`）にプッシュされている必要があります。
 3. プッシュ後、GitHub の "Actions" タブからビルド進捗を確認できます。
 4. 完了すると、Artifacts から `zephyr.uf2` をダウンロードできます。
-    - **`touchpass-seeed_xiao_nrf52840-zmk.uf2`**: 通常のファームウェア。
-    - **`settings_reset-seeed_xiao_nrf52840-zmk.uf2`**: フラッシュメモリの設定（ペアリング情報や内部ストレージ）を初期化するためのツールです。トラブル時や Arduino 版から移行する際に最初に使用してください。
+    - **`touchpass-seeeduino_xiao_ble-zmk.uf2`**: 通常のファームウェア。
+    - **`settings_reset-seeeduino_xiao_ble-zmk.uf2`**: フラッシュメモリの設定（ペアリング情報や内部ストレージ）を初期化するためのツールです。トラブル時や Arduino 版から移行する際に最初に使用してください。
 
 ### ローカルビルド
 ```bash
-west build -b seeed_xiao_nrf52840 -- -DSHIELD=touchpass -DZMK_CONFIG="$(pwd)/config"
+west build -b seeeduino_xiao_ble -- -DSHIELD=touchpass -DZMK_CONFIG="$(pwd)/config"
 ```

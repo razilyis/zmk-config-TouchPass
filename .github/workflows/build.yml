@@ -37,7 +37,7 @@ jobs:
         run: west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
 
       - name: Rename UF2 (TouchPass)
-        run: cp workspace/build/zephyr/zmk.uf2 touchpass-seeed_xiao_nrf52840-zmk.uf2
+        run: cp workspace/build/zephyr/zmk.uf2 touchpass-seeeduino_xiao_ble-zmk.uf2
 
       - name: West Build (Settings Reset)
         working-directory: workspace
@@ -46,7 +46,7 @@ jobs:
           west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=settings_reset -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
 
       - name: Rename UF2 (Settings Reset)
-        run: cp workspace/build/zephyr/zmk.uf2 settings_reset-seeed_xiao_nrf52840-zmk.uf2
+        run: cp workspace/build/zephyr/zmk.uf2 settings_reset-seeeduino_xiao_ble-zmk.uf2
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
