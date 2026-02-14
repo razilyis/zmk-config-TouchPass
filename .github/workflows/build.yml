@@ -1,55 +1,5 @@
-name: Build
-
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container:
-      image: zmkfirmware/zmk-build-arm:stable
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-            path: main-repo
-
-      - name: Create Workspace
-        run: |
-          mkdir workspace
-          cp -r main-repo/config workspace/config
-
-      - name: West Init
-        working-directory: workspace
-        run: west init -l config
-
-      - name: West Update
-        working-directory: workspace
-        run: |
-          git config --global url."https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com/".insteadOf "https://github.com/"
-          west update
-
-      - name: West Zephyr export
-        working-directory: workspace
-        run: west zephyr-export
-
-      - name: West Build (TouchPass)
-        working-directory: workspace
-        run: west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=touchpass -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
-
-      - name: Rename UF2 (TouchPass)
-        run: cp workspace/build/zephyr/zmk.uf2 touchpass-seeeduino_xiao_ble-zmk.uf2
-
-      - name: West Build (Settings Reset)
-        working-directory: workspace
-        run: |
-          rm -rf build/
-          west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=settings_reset -DZMK_CONFIG="${GITHUB_WORKSPACE}/workspace/config"
-
-      - name: Rename UF2 (Settings Reset)
-        run: cp workspace/build/zephyr/zmk.uf2 settings_reset-seeeduino_xiao_ble-zmk.uf2
-
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: touchpass-firmware
-          path: ./*.uf2
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
