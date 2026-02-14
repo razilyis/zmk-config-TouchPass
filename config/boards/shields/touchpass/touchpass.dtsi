@@ -4,6 +4,14 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
+        zmk,physical_layout = &phys_layout0;
+    };
+
+    phys_layout0: phys_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
     };
 
     default_transform: matrix_transform {
