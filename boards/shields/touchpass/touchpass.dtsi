@@ -1,0 +1,10 @@
+/ {
+    behaviors {
+        tp: tp {
+            compatible = "zmk,behavior-touchpass";
+            #binding-cells = <0>;
+        };
+    };
+
+    /* Future extension: touch sensor node can be defined here */
+};

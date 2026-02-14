@@ -1,0 +1,17 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &kp A &kp B &kp C 
+                &bt BT_CLR &bt BT_SEL 0
+                &tp // This is our custom TouchPass behavior
+            >;
+        };
+    };
+};

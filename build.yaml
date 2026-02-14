@@ -1,0 +1,6 @@
+---
+include:
+  - board: seeed_xiao_nrf52840
+    shield: touchpass
+  - board: seeed_xiao_nrf52840
+    shield: settings_reset

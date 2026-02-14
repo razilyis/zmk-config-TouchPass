@@ -1,0 +1,6 @@
+if SHIELD_TOUCHPASS
+
+config ZMK_KEYBOARD_NAME
+    default "TouchPass for Zmk"
+
+endif
