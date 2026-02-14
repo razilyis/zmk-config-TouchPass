@@ -17,9 +17,6 @@ jobs:
         run: |
           mkdir workspace
           cp -r main-repo/config workspace/config
-          # Copy only shields to avoid board name conflicts with ZMK built-ins
-          mkdir -p workspace/boards
-          cp -r main-repo/boards/shields workspace/boards/
 
       - name: West Init
         working-directory: workspace
