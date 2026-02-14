@@ -17,16 +17,8 @@
     };
 };
 
-// Enable DCDC regulator for power efficiency and stability
-&reg0 {
-    regulator-always-on;
-    regulator-boot-on;
-};
-
-&reg1 {
-    regulator-always-on;
-    regulator-boot-on;
-};
+// DCDC is enabled via Kconfig (CONFIG_BOARD_ENABLE_DCDC=y) in ZMK v0.3/Zephyr 3.5
+// The reg0/reg1 nodes are not defined in this version's device tree.
 
 / {
     chosen {
