@@ -7,22 +7,11 @@
     };
 };
 
-/* Ensure storage partition is defined for LittleFS */
-&flash0 {
-    partitions {
-        compatible = "fixed-partitions";
-        #address-cells = <1>;
-        #size-cells = <1>;
-
-        storage_partition: partition@ec000 {
-            label = "storage";
-            reg = <0x000ec000 0x00008000>;
-        };
-    };
-};
-
 &zephyr_udc0 {
     status = "okay";
+    usb_cdc_acm_uart: cdc-acm-uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
 };
 
 &pinctrl {
