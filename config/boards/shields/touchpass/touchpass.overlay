@@ -1,19 +1,5 @@
 #include "touchpass.dtsi"
 
-/ {
-    chosen {
-        zephyr,console = &usb_cdc_acm_uart;
-        zephyr,shell-uart = &usb_cdc_acm_uart;
-    };
-};
-
-&zephyr_udc0 {
-    status = "okay";
-    usb_cdc_acm_uart: cdc-acm-uart {
-        compatible = "zephyr,cdc-acm-uart";
-    };
-};
-
 &pinctrl {
     uart0_default: uart0_default {
         group1 {
@@ -28,6 +14,28 @@
                     <NRF_PSEL(UART_RX, 1, 12)>;
             low-power-enable;
         };
+    };
+};
+
+// Enable DCDC regulator for power efficiency and stability
+&reg0 {
+    regulator-always-on;
+    regulator-boot-on;
+};
+
+&reg1 {
+    regulator-always-on;
+    regulator-boot-on;
+};
+
+/ {
+    chosen {
+        /* Disable default UART console to prevent boot hang if pins are used elsewhere */
+        /* Console will be handled by USB CDC ACM (zephyr_udc0) */
+        /delete-property/ zephyr,console;
+        /delete-property/ zephyr,shell-uart;
+        zephyr,console = &usb_cdc_acm_uart;
+        zephyr,shell-uart = &usb_cdc_acm_uart;
     };
 };
 
