@@ -2,16 +2,27 @@
 
 / {
     chosen {
-        zephyr,console = &cdc_acm_uart0;
-        zephyr,shell-uart = &cdc_acm_uart0;
+        zephyr,console = &usb_cdc_acm_uart;
+        zephyr,shell-uart = &usb_cdc_acm_uart;
+    };
+};
+
+/* Ensure storage partition is defined for LittleFS */
+&flash0 {
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+
+        storage_partition: partition@ec000 {
+            label = "storage";
+            reg = <0x000ec000 0x00008000>;
+        };
     };
 };
 
 &zephyr_udc0 {
     status = "okay";
-    cdc_acm_uart0: cdc_acm_uart0 {
-        compatible = "zephyr,cdc-acm-uart";
-    };
 };
 
 &pinctrl {
