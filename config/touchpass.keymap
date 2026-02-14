@@ -10,7 +10,7 @@
             bindings = <
                 &kp A &kp B &kp C 
                 &bt BT_CLR &bt BT_SEL 0
-                &tp // This is our custom TouchPass behavior
+                &none // TouchPass behavior disabled for Phase 1 boot test
             >;
         };
     };
