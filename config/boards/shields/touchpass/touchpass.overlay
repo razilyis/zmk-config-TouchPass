@@ -52,7 +52,7 @@
         #address-cells = <1>;
         #size-cells = <1>;
 
-        /* TouchPass finger data (LittleFS) — separate from NVS */
+        /* TouchPass finger data (NVS) — separate from ZMK settings NVS */
         touchpass_partition: partition@e4000 {
             label = "touchpass";
             reg = <0x000e4000 0x00008000>;
