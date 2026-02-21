@@ -11,6 +11,6 @@ manifest:
       import: app/west.yml
     - name: zmk-module-TouchPass
       remote: TouchPass
-      revision: main
+      revision: dev
   self:
     path: config
