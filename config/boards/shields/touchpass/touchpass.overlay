@@ -52,6 +52,12 @@
         #address-cells = <1>;
         #size-cells = <1>;
 
+        /* Overwrite code_partition to make space for touchpass_partition at the end */
+        /* 0xe4000 - 0x27000 = 0xbd000 */
+        code_partition: partition@27000 {
+            reg = <0x00027000 0x000bd000>;
+        };
+
         /* TouchPass finger data (NVS) — separate from ZMK settings NVS */
         touchpass_partition: partition@e4000 {
             label = "touchpass";

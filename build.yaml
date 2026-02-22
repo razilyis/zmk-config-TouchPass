@@ -1,6 +1,6 @@
 ---
 include:
-  - board: xiao_ble
+  - board: seeeduino_xiao_ble
     shield: touchpass
-  - board: xiao_ble
+  - board: seeeduino_xiao_ble
     shield: settings_reset
